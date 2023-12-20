@@ -1,0 +1,6 @@
+.env.local
+.env
+config.js
+node_modules
+.history/.env_20231130194810.local
+.history/.env_20231130195028.local
