@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -91,21 +90,20 @@ app.use((req, res, next) => {
   const token =
     req.headers.authorization && req.headers.authorization.split(" ")[1];
   if (!token) {
-    return res.status(401).json({ message: "Unauthorized Access" });
+    return res.status(401).json({ message: "Unauthprized Access" });
   }
 
   const decodedToken = jwtDecode(token);
 
-  if (decodedToken.aud === process.env.AUTHORIZATION_AUD) {
+  if (decodedToken.aud === "keffi-app") {
     req.decodedToken = decodedToken;
     next();
   } else {
     res.status(401).json({ message: "Unauthorized Access" });
   }
 });
-
 //Connection
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, (err) => {
   console.log("Listening to port", PORT);
   if (err) {

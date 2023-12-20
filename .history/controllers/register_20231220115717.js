@@ -1,8 +1,9 @@
 const db = require("../models");
 const Registered = db.register;
+const { getAuthorization } = require("../utilities/getAuthorization");
 
 //POST
-exports.create = (req, res) => {
+exports.create = (req, res, next) => {
   if (!req.body) {
     res.status(400).json({ message: "Body cannot be empty" });
     return;
@@ -36,7 +37,7 @@ exports.create = (req, res) => {
 
 //GET ALL
 
-exports.findAll = (req, res) => {
+exports.findAll = (req, res, next) => {
   const id = req.query.id;
   var condition = id ? { id: { $regex: new RegExp(id), $options: "i" } } : {};
   Registered.find(condition)
@@ -50,7 +51,7 @@ exports.findAll = (req, res) => {
 
 //GET BY ID
 
-exports.findOne = (req, res) => {
+exports.findOne = (req, res, next) => {
   const id = req.params.id;
   Registered.findById(id)
     .then((data) => {
@@ -64,7 +65,7 @@ exports.findOne = (req, res) => {
 
 //UPDATE BY ID
 
-exports.update = (req, res) => {
+exports.update = (req, res, next) => {
   const id = req.params.id;
   Registered.findByIdAndUpdate(id, { $set: req.body }, (err, data, next) => {
     if (err) {
@@ -79,7 +80,7 @@ exports.update = (req, res) => {
 
 //DELETE BY ID
 
-exports.delete = (req, res) => {
+exports.delete = (req, res, next) => {
   const id = req.params.id;
   Registered.findByIdAndRemove(id)
     .then((data) => {
@@ -96,7 +97,7 @@ exports.delete = (req, res) => {
 
 //DELETE ALL
 
-exports.deleteAll = (req, res) => {
+exports.deleteAll = (req, res, next) => {
   Registered.deleteMany({})
     .then((data) => {
       res.status(200).json();

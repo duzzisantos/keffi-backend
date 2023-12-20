@@ -1,5 +1,6 @@
 const db = require("../models");
 const Registered = db.register;
+const { getAuthorization } = require("../utilities/getAuthorization");
 
 //POST
 exports.create = (req, res) => {

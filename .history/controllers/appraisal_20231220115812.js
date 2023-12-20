@@ -1,4 +1,5 @@
 const db = require("../models");
+
 const Appraisal = db.appraisal;
 
 //CREATE

@@ -44,7 +44,7 @@ exports.findAll = (req, res) => {
   var condition = id ? { id: { $regex: new RegExp(id), $options: "i" } } : {};
   Appraisal.find(condition)
     .then((data) => {
-      res.json(data);
+      res.json(data)
       console.log(data);
     })
     .catch((err) => {
@@ -53,7 +53,7 @@ exports.findAll = (req, res) => {
 };
 
 //GET ONE
-exports.findOne = (req, res, next) => {
+exports.findOne = (req, res) => {
   const id = req.params._id;
   Appraisal.findById(id)
     .then((data) => {

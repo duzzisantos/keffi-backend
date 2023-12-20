@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -7,7 +6,6 @@ const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
 
 const db = require("./models");
-const { jwtDecode } = require("jwt-decode");
 
 db.mongoose
   .connect(process.env.MONGO_URI || db.url, {
@@ -86,26 +84,8 @@ app.post("/", (req, res) => {
 require("./routes/appraisal")(app);
 require("./routes/register")(app);
 
-//MiddelWare for checking authorized users
-app.use((req, res, next) => {
-  const token =
-    req.headers.authorization && req.headers.authorization.split(" ")[1];
-  if (!token) {
-    return res.status(401).json({ message: "Unauthorized Access" });
-  }
-
-  const decodedToken = jwtDecode(token);
-
-  if (decodedToken.aud === process.env.AUTHORIZATION_AUD) {
-    req.decodedToken = decodedToken;
-    next();
-  } else {
-    res.status(401).json({ message: "Unauthorized Access" });
-  }
-});
-
 //Connection
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, (err) => {
   console.log("Listening to port", PORT);
   if (err) {
@@ -115,6 +95,6 @@ app.listen(PORT, (err) => {
 
 //production settings
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("keffi/build"));
+if(process.env.NODE_ENV === "production"){
+   app.use(express.static('keffi/build'))
 }

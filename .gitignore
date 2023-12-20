@@ -1,4 +1,5 @@
 .env.local
+.env
 config.js
 node_modules
 .history/.env_20231130194810.local

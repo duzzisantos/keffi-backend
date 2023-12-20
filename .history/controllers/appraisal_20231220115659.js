@@ -1,9 +1,10 @@
 const db = require("../models");
+const { getAuthorization } = require("../utilities/getAuthorization");
 const Appraisal = db.appraisal;
 
 //CREATE
 
-exports.create = (req, res) => {
+exports.create = (req, res, next) => {
   if (!req.body) {
     res.status(500).json({ message: "Form cannot be empty!" });
     return;
@@ -39,7 +40,7 @@ exports.create = (req, res) => {
 
 //GET ALL
 
-exports.findAll = (req, res) => {
+exports.findAll = (req, res, next) => {
   const id = req.query.id;
   var condition = id ? { id: { $regex: new RegExp(id), $options: "i" } } : {};
   Appraisal.find(condition)
@@ -67,7 +68,7 @@ exports.findOne = (req, res, next) => {
 
 //UPDATE
 
-exports.update = (req, res) => {
+exports.update = (req, res, next) => {
   const id = req.params._id;
   Appraisal.findByIdAndUpdate(id, { $set: req.body }, (err, data, next) => {
     if (err) {
@@ -86,7 +87,7 @@ exports.update = (req, res) => {
 
 //DELETE ONE
 
-exports.delete = (req, res) => {
+exports.delete = (req, res, next) => {
   const id = req.params.id;
   Appraisal.findByIdAndRemove(id)
     .then((data) => {
@@ -107,7 +108,7 @@ exports.delete = (req, res) => {
 
 //DELETE ALL
 
-exports.deleteAll = (req, res) => {
+exports.deleteAll = (req, res, next) => {
   Appraisal.deleteMany({})
     .then((data) => {
       res.status(200).json("Deleted all employee information!");

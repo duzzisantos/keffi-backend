@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -105,7 +104,7 @@ app.use((req, res, next) => {
 });
 
 //Connection
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, (err) => {
   console.log("Listening to port", PORT);
   if (err) {

@@ -1,4 +1,5 @@
 const db = require("../models");
+const { getAuthorization } = require("../utilities/getAuthorization");
 const Appraisal = db.appraisal;
 
 //CREATE
