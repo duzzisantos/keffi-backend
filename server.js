@@ -72,19 +72,10 @@ app.use(
   })
 );
 
-//HTTP REQUESTS
-app.get("/", (req, res) => {
-  console.log(res.json({ message: "Backend works!" }));
-});
-
-app.post("/", (req, res) => {
-  res.redirect("/register");
-  console.log(res.json({ message: "This route handles registration!" }));
-});
-
 //REST routes
 require("./routes/appraisal")(app);
 require("./routes/register")(app);
+require("./routes/recommendations.routes")(app);
 
 //MiddelWare for checking authorized users
 app.use((req, res, next) => {
