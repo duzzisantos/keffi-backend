@@ -28,6 +28,7 @@ var corsOptions = {
   origin: "http://localhost:8080",
 };
 app.use(cors(corsOptions));
+app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -77,7 +78,7 @@ require("./routes/appraisal")(app);
 require("./routes/register")(app);
 require("./routes/recommendations.routes")(app);
 
-//MiddelWare for checking authorized users
+//MiddleWare for checking authorized users
 app.use((req, res, next) => {
   const token =
     req.headers.authorization && req.headers.authorization.split(" ")[1];

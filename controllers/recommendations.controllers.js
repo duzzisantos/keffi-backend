@@ -5,66 +5,20 @@ exports.create = (req, res) => {
     res.status(404).json({ message: "Request body not found" });
   }
 
-  const {
-    qualityOfWork,
-    quantityOfWork,
-    delivery,
-    responsibility,
-    punctuality,
-  } = req.body;
-
-  const recommender = new Recommender({
-    //Quality metrics
-    highQualityTraining: qualityOfWork.highQuality.training,
-    highQualityBehaviour: qualityOfWork.highQuality.behavioural,
-    averageQualityTraining: qualityOfWork.averageQuality.training,
-    averageQualityBehaviour: qualityOfWork.averageQuality.behavioural,
-    lowQualityTraining: qualityOfWork.lowQuality.training,
-    lowQualityBehavioural: qualityOfWork.lowQuality.behavioural,
-
-    //Quantity metrics
-    highQuantityTraining: quantityOfWork.highQuantity.training,
-    highQuantityBehaviour: quantityOfWork.highQuantity.behavioural,
-    averageQuantityTraining: quantityOfWork.averageQuantity.training,
-    averageQuantityBehaviour: quantityOfWork.averageQuantity.behavioural,
-    lowQuantityTraining: quantityOfWork.lowQuantity.training,
-    lowQuantityBehavioural: quantityOfWork.lowQuantity.behavioural,
-
-    //Delivery metrics
-    highDeliveryTraining: delivery.highDelivery.training,
-    highDeliveryBehaviour: delivery.highDelivery.behavioural,
-    averageDeliveryTraining: delivery.averageDelivery.training,
-    averageDeliveryBehaviour: delivery.averageDelivery.behavioural,
-    lowDeliveryTraining: delivery.lowDelivery.training,
-    lowDeliveryBehavioural: delivery.lowDelivery.behavioural,
-
-    //Responsibility metrics
-    highResponsibilityTraining: responsibility.highResponsibility.training,
-    highResponsibilityBehaviour: responsibility.highResponsibility.behavioural,
-    averageResponsibilityTraining:
-      responsibility.averageResponsibility.training,
-    averageResponsibiltyBehaviour:
-      responsibility.averageResponsibility.behavioural,
-    lowResponsibilityTraining: responsibility.lowResponsibility.training,
-    lowResponsibilityBehavioural: responsibility.lowResponsibility.behavioural,
-
-    //Punctuality metrics
-    highPunctualityTraining: punctuality.highPunctuality.training,
-    highPunctualityBehaviour: punctuality.highPunctuality.behavioural,
-    averagePunctualityTraining: punctuality.averagePunctuality.training,
-    averagePunctualityBehaviour: punctuality.averagePunctuality.behavioural,
-    lowPunctualityTraining: punctuality.lowPunctuality.training,
-    lowPunctualityBehavioural: punctuality.lowPunctuality.behavioural,
-  });
-
+  //Form data from react matches data model structure - therefore calling
+  //req.body as argument for the new Recommender instance suffices.
+  const recommender = new Recommender(req.body);
   recommender
-    .save(recommender)
-    .then((data) => res.json(data))
-    .catch((err) => console.warn(err.message));
+    .save()
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      console.error("Error saving recommendation:", error);
+    });
 };
 
 //GET ALL
-
 exports.findAll = (req, res) => {
   const id = req.query.id;
   var condition = id ? { id: { $regex: new RegExp(id), $options: "i" } } : {};
