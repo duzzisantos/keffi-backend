@@ -24,7 +24,7 @@ exports.create = (req, res) => {
   registered
     .save(registered)
     .then((data) => {
-      console.log(res.json(data));
+      console.log(res.json(data.createdAt));
     })
     .catch((err) => {
       if (err)

@@ -45,7 +45,6 @@ exports.findAll = (req, res) => {
   Appraisal.find(condition)
     .then((data) => {
       res.json(data);
-      console.log(data);
     })
     .catch((err) => {
       console.log(err);
@@ -58,7 +57,6 @@ exports.findOne = (req, res, next) => {
   Appraisal.findById(id)
     .then((data) => {
       res.status(200).json();
-      console.log(data);
     })
     .catch((err) => {
       console.log(err);
@@ -111,7 +109,6 @@ exports.deleteAll = (req, res) => {
   Appraisal.deleteMany({})
     .then((data) => {
       res.status(200).json("Deleted all employee information!");
-      console.log(data);
     })
     .catch((err) => {
       res.status(500).json({
