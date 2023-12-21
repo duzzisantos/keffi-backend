@@ -66,7 +66,7 @@ exports.findOne = (req, res, next) => {
 //UPDATE
 
 exports.update = (req, res) => {
-  const id = req.params._id;
+  const id = req.params.id;
   Appraisal.findByIdAndUpdate(id, { $set: req.body }, (err, data, next) => {
     if (err) {
       res.status(500).json({
