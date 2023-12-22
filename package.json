@@ -11,7 +11,7 @@
     "start": "node server.js",
     "test": "mocha tests/**/*.js",
     "lint": "eslint .",
-    "build": "babel src -d dist",
+    "build": "babel src -d lib",
     "custom-script": "node custom-script.js"
   },
   "keywords": [
