@@ -8,7 +8,7 @@
   },
   "private": "true",
   "scripts": {
-    "start": "node app/index.js",
+    "start": "nodemon app/index.js",
     "build": "babel app -d dist"
   },
   "keywords": [
