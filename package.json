@@ -11,7 +11,7 @@
     "start": "nodemon server.js",
     "test": "mocha tests/**/*.js",
     "lint": "eslint .",
-    "build": "npm run build",
+    "build": "babel . --out-dir dist",
     "custom-script": "node custom-script.js"
   },
   "keywords": [
