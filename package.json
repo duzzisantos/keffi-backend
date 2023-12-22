@@ -8,8 +8,8 @@
   },
   "private": "true",
   "scripts": {
-    "start": "node index.js",
-    "build": "babel index -d dist"
+    "start": "node app/index.js",
+    "build": "babel app -d dist"
   },
   "keywords": [
     "mern stack",
