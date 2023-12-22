@@ -25,7 +25,7 @@ db.mongoose
   });
 
 var corsOptions = {
-  origin: "http://localhost:8080",
+  origin: "http://localhost:8080" ?? process.env.CLIENT_HOSTNAME,
 };
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -98,8 +98,9 @@ app.use((req, res, next) => {
 
 //Connection
 const PORT = process.env.PORT;
+const webHostName = process.env.CLIENT_HOSTNAME;
 app.listen(PORT, (err) => {
-  console.log("Listening to port", PORT);
+  console.log("Listening to port", PORT ?? webHostName);
   if (err) {
     console.log(err);
   }
