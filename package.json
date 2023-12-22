@@ -2,7 +2,7 @@
   "name": "keffi-server",
   "version": "1.0.0",
   "description": "Application for HR Management",
-  "main": "server.js",
+  "main": "index.js",
   "engines": {
     "node": ">=16.15.1"
   },
