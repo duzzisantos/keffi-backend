@@ -9,7 +9,7 @@ const helmet = require("helmet");
 const compression = require("compression");
 const RateLimit = require("express-rate-limit");
 
-const db = require("./models");
+const db = require("../models");
 const { jwtDecode } = require("jwt-decode");
 
 db.mongoose
@@ -85,9 +85,9 @@ app.use(
 );
 
 //REST routes
-require("./routes/appraisal")(app);
-require("./routes/register")(app);
-require("./routes/recommendations.routes")(app);
+require("../routes/appraisal")(app);
+require("../routes/register")(app);
+require("../routes/recommendations.routes")(app);
 
 //MiddleWare for checking authorized users
 app.use((req, res, next) => {
