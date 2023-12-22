@@ -22,7 +22,10 @@
   ],
   "author": "Duzie Uche-Abba",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/core": "^7.23.6",
+    "@babel/preset-env": "^7.23.6",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "compression": "^1.7.4",
