@@ -1,10 +1,13 @@
 require("dotenv").config();
+process.env.NODE_ENV = "production";
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
+const compression = require("compression");
+const RateLimit = require("express-rate-limit");
 
 const db = require("./models");
 const { jwtDecode } = require("jwt-decode");
@@ -27,10 +30,18 @@ db.mongoose
 var corsOptions = {
   origin: "http://localhost:8080" ?? process.env.CLIENT_HOSTNAME,
 };
+
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 100,
+  max: 20,
+});
+
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(compression());
+app.use(limiter);
 
 //Security parameters
 app.use(helmet());
@@ -105,9 +116,3 @@ app.listen(PORT, (err) => {
     console.log(err);
   }
 });
-
-//production settings
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("keffi/build"));
-}

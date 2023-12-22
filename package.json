@@ -4,15 +4,15 @@
   "description": "Application for HR Management",
   "main": "server.js",
   "engines": {
-    "node": "16.15.1"
+    "node": ">=16.15.1"
   },
+  "private": "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd keffi && npm run build",
-    "install-client": "cd keffi && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build",
     "start": "node server.js",
-    "client": "cd keffi && npm start"
+    "test": "mocha tests/**/*.js",
+    "lint": "eslint .",
+    "build": "babel src -d dist",
+    "custom-script": "node custom-script.js"
   },
   "keywords": [
     "mern stack",
@@ -25,10 +25,12 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.17.3",
     "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^7.1.5",
     "helmet": "^5.0.2",
     "jwt-decode": "^4.0.0",
     "method-override": "^3.0.0",
