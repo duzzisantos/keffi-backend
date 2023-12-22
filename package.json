@@ -8,7 +8,7 @@
   },
   "private": "true",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon --exec npx babel-node src/index.js",
     "test": "mocha tests/**/*.js",
     "lint": "eslint .",
     "build": "babel . --out-dir dist",
