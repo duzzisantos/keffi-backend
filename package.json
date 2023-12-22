@@ -8,10 +8,10 @@
   },
   "private": "true",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon --exec npx babel-node src/index.js",
     "test": "mocha tests/**/*.js",
     "lint": "eslint .",
-    "build": "babel src -d lib",
+    "build": "babel src -d dist",
     "custom-script": "node custom-script.js"
   },
   "keywords": [
@@ -22,7 +22,7 @@
   ],
   "author": "Duzie Uche-Abba",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "@babel/cli": "^7.23.4",
     "@babel/core": "^7.23.6",
     "@babel/preset-env": "^7.23.6",
