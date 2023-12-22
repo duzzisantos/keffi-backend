@@ -8,11 +8,10 @@
   },
   "private": "true",
   "scripts": {
-    "start": "nodemon --exec npx babel-node src/index.js",
+    "start": "nodemon server.js",
     "test": "mocha tests/**/*.js",
     "lint": "eslint .",
-    "build": "babel . --out-dir dist",
-    "custom-script": "node custom-script.js"
+    "build": "webpack --mode production"
   },
   "keywords": [
     "mern stack",
@@ -39,5 +38,8 @@
     "method-override": "^3.0.0",
     "mongoose": "^6.2.10",
     "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "webpack": "^5.89.0"
   }
 }
