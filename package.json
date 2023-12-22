@@ -8,10 +8,8 @@
   },
   "private": "true",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "mocha tests/**/*.js",
-    "lint": "eslint .",
-    "build": "webpack --mode production"
+    "start": "node index.js",
+    "build": "webpack --config webpack.config.js"
   },
   "keywords": [
     "mern stack",
