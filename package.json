@@ -29,6 +29,7 @@
     "express": "^4.17.3",
     "express-mongo-sanitize": "^2.2.0",
     "express-rate-limit": "^7.1.5",
+    "express-sslify": "^1.2.0",
     "fs": "^0.0.1-security",
     "helmet": "^5.0.2",
     "https": "^1.0.0",
