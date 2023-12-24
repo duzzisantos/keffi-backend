@@ -27,6 +27,7 @@ db.mongoose
     }
   });
 
+//expanded cor options
 var corsOptions = {
   origin: "http://localhost:3000" ?? process.env.CLIENT_HOSTNAME,
   methods: "GET, POST, PUT, DELETE",
