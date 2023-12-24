@@ -32,7 +32,7 @@ const isLocal = process.env.NODE_ENV === "development";
 const isProd = process.env.NODE_ENV === "production";
 var corsOptions = {
   origin: isLocal
-    ? "http://localhost:3000"
+    ? "https://localhost:3000"
     : isProd && process.env.CLIENT_HOSTNAME,
   methods: "GET, POST, PUT, DELETE",
   credentials: true,
@@ -71,7 +71,7 @@ app.use(
     useDefaults: false,
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "http://localhost:3000/"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://localhost:3000/"],
       styleSrc: ["'self'"],
       imgSrc: ["'self'"],
       upgradeInsecureRequests: [],
