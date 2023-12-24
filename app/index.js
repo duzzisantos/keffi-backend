@@ -3,7 +3,6 @@ process.env.NODE_ENV = "production";
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const enforce = require("express-sslify");
 const bodyParser = require("body-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
@@ -32,7 +31,7 @@ const isLocal = process.env.NODE_ENV === "development";
 const isProd = process.env.NODE_ENV === "production";
 var corsOptions = {
   origin: isLocal
-    ? "https://localhost:3000"
+    ? "http://localhost:3000"
     : isProd && process.env.CLIENT_HOSTNAME,
   methods: "GET, POST, PUT, DELETE",
   credentials: true,
@@ -60,18 +59,12 @@ app.use(
   })
 );
 
-// Enforce HTTPS in production
-if (process.env.NODE_ENV === "production") {
-  app.use(enforce.HTTPS({ trustProtoHeader: true }));
-}
-
-// Use helmet.contentSecurityPolicy middleware
 app.use(
   helmet.contentSecurityPolicy({
     useDefaults: false,
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://localhost:3000/"],
+      scriptSrc: ["'self'", "http://localhost:3000/"],
       styleSrc: ["'self'"],
       imgSrc: ["'self'"],
       upgradeInsecureRequests: [],
