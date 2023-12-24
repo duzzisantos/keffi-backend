@@ -33,6 +33,10 @@ var corsOptions = {
   origin: isLocal
     ? "http://localhost:3000"
     : isProd && process.env.CLIENT_HOSTNAME,
+  methods: "GET, POST, PUT, DELETE",
+  crendentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
 };
 
 const limiter = RateLimit({
