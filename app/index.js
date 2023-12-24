@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
 const compression = require("compression");
-// const RateLimit = require("express-rate-limit");
+const RateLimit = require("express-rate-limit");
 
 const db = require("../models");
 const { jwtDecode } = require("jwt-decode");
@@ -33,10 +33,10 @@ var corsOptions = {
   methods: "GET, POST, PUT, DELETE",
 };
 
-// const limiter = RateLimit({
-//   windowMs: 1 * 60 * 100,
-//   max: 20,
-// });
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 100,
+  max: 20,
+});
 
 app.use(cors(corsOptions));
 app.use(express.json());
