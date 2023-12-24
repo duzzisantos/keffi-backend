@@ -27,16 +27,9 @@ db.mongoose
     }
   });
 
-const isLocal = process.env.NODE_ENV === "development";
-const isProd = process.env.NODE_ENV === "production";
 var corsOptions = {
-  origin: isLocal
-    ? "http://localhost:3000"
-    : isProd && process.env.CLIENT_HOSTNAME,
+  origin: "http://localhost:3000" ?? process.env.CLIENT_HOSTNAME,
   methods: "GET, POST, PUT, DELETE",
-  credentials: true,
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
 };
 
 const limiter = RateLimit({
