@@ -43,7 +43,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(compression());
-// app.use(limiter);
+app.use(limiter);
 
 //Security parameters
 app.use(helmet());
