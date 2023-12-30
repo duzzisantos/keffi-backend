@@ -3,7 +3,6 @@ process.env.NODE_ENV = "production";
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const bodyParser = require("body-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
 const compression = require("compression");
@@ -40,8 +39,7 @@ const limiter = RateLimit({
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 app.use(limiter);
 
