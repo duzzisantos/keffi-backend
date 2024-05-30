@@ -5,17 +5,14 @@ const app = express();
 const cors = require("cors");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
-const compression = require("compression");
+
 const RateLimit = require("express-rate-limit");
 
 const db = require("../models");
 const { jwtDecode } = require("jwt-decode");
 
 db.mongoose
-  .connect(process.env.MONGO_URI || db.url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI || db.url)
   .then(() => {
     console.log("Database connected successfully!");
   })
@@ -38,9 +35,9 @@ const limiter = RateLimit({
 });
 
 app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(compression());
+app.use(express.json({ limit: "200kb" }));
+app.use(express.urlencoded({ extended: true, limit: "200kb" }));
+
 app.use(limiter);
 
 //Security parameters
@@ -110,7 +107,7 @@ app.use((req, res, next) => {
 //Connection
 const PORT = process.env.PORT;
 const webHostName = process.env.CLIENT_HOSTNAME;
-app.listen(PORT, (err) => {
+app.listen(PORT, "0.0.0.0", (err) => {
   console.log("Listening to port", PORT ?? webHostName);
   if (err) {
     console.log(err);
