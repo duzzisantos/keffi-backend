@@ -27,6 +27,8 @@ db.mongoose
 var corsOptions = {
   origin: "http://localhost:3000" ?? process.env.CLIENT_HOSTNAME,
   methods: "GET, POST, PUT, DELETE",
+  allowedHeaders: ["Content-Type", "Authorization"], // Add required headers
+  credentials: true, // If you need to include cookies in CORS requests
 };
 
 const limiter = RateLimit({
@@ -105,10 +107,10 @@ app.use((req, res, next) => {
 });
 
 //Connection
-const PORT = process.env.PORT;
-const webHostName = process.env.CLIENT_HOSTNAME;
+const PORT = process.env.PORT || 8080;
+
 app.listen(PORT, "0.0.0.0", (err) => {
-  console.log("Listening to port", PORT ?? webHostName);
+  console.log("Listening to port", PORT);
   if (err) {
     console.log(err);
   }
