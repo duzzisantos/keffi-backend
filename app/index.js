@@ -25,7 +25,10 @@ db.mongoose
 
 //expanded cor options
 var corsOptions = {
-  origin: "http://localhost:3000" ?? process.env.CLIENT_HOSTNAME,
+  origin:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : process.env.CLIENT_HOSTNAME,
   methods: "GET, POST, PUT, DELETE",
   allowedHeaders: ["Content-Type", "Authorization"], // Add required headers
   credentials: true, // If you need to include cookies in CORS requests
@@ -33,7 +36,7 @@ var corsOptions = {
 
 const limiter = RateLimit({
   windowMs: 1 * 60 * 100,
-  max: 20,
+  max: 30,
 });
 
 app.use(cors(corsOptions));
